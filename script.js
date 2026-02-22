@@ -5,7 +5,6 @@ const previewImage = document.getElementById('previewImage');
 const subtitleOverlay = document.getElementById('subtitleOverlay');
 const generateBtn = document.getElementById('generateBtn');
 const resetBtn = document.getElementById('resetBtn');
-const apiKeyInput = document.getElementById('apiKey');
 const loading = document.getElementById('loading');
 
 let currentImageBase64 = '';
@@ -50,11 +49,7 @@ function handleImageUpload(file) {
 }
 
 generateBtn.addEventListener('click', async () => {
-    const apiKey = apiKeyInput.value.trim();
-    if (!apiKey) {
-        alert('请输入 Claude API Key');
-        return;
-    }
+    const apiKey = 'gr_de8a9d46bad012a50047c44599c37f848d272eff27126326cad19b74f369540c';
 
     loading.style.display = 'block';
     subtitleOverlay.classList.remove('show');
