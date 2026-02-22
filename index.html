@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>图片字幕生成器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>图片字幕生成器</h1>
+
+        <div class="upload-area" id="uploadArea">
+            <input type="file" id="fileInput" accept="image/*" hidden>
+            <div class="upload-text">
+                <p>点击或拖拽图片到这里</p>
+                <p class="upload-hint">支持 JPG、PNG、GIF 格式</p>
+            </div>
+        </div>
+
+        <div class="preview-section" id="previewSection" style="display: none;">
+            <div class="image-container">
+                <img id="previewImage" alt="预览图片">
+                <div class="subtitle-overlay" id="subtitleOverlay"></div>
+            </div>
+
+            <div class="controls">
+                <button id="generateBtn" class="btn-primary">生成字幕</button>
+                <button id="resetBtn" class="btn-secondary">重新上传</button>
+            </div>
+
+            <div class="api-key-section">
+                <label for="apiKey">Claude API Key:</label>
+                <input type="password" id="apiKey" placeholder="输入你的 Claude API Key">
+            </div>
+        </div>
+
+        <div class="loading" id="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>正在生成字幕...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
