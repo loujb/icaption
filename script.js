@@ -49,8 +49,6 @@ function handleImageUpload(file) {
 }
 
 generateBtn.addEventListener('click', async () => {
-    const apiKey = 'gr_de8a9d46bad012a50047c44599c37f848d272eff27126326cad19b74f369540c';
-
     loading.style.display = 'block';
     subtitleOverlay.classList.remove('show');
 
@@ -58,33 +56,14 @@ generateBtn.addEventListener('click', async () => {
         const base64Data = currentImageBase64.split(',')[1];
         const mediaType = currentImageBase64.match(/data:(image\/\w+);/)[1];
 
-        const response = await fetch('https://api.anthropic.com/v1/messages', {
+        const response = await fetch('http://localhost:3000/api/generate', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'x-api-key': apiKey,
-                'anthropic-version': '2023-06-01'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                model: 'claude-3-5-sonnet-20241022',
-                max_tokens: 1024,
-                messages: [{
-                    role: 'user',
-                    content: [
-                        {
-                            type: 'image',
-                            source: {
-                                type: 'base64',
-                                media_type: mediaType,
-                                data: base64Data
-                            }
-                        },
-                        {
-                            type: 'text',
-                            text: '请用一句简短有力的中文描述这张图片的核心内容，像电影字幕一样。不超过20个字，要有画面感和情感。'
-                        }
-                    ]
-                }]
+                image: base64Data,
+                mediaType: mediaType
             })
         });
 
