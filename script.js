@@ -72,6 +72,15 @@ generateBtn.addEventListener('click', async () => {
         }
 
         const data = await response.json();
+
+        if (data.error) {
+            throw new Error(data.error.message || data.error);
+        }
+
+        if (!data.content || !data.content[0]) {
+            throw new Error('API 返回数据格式错误');
+        }
+
         const caption = data.content[0].text;
 
         subtitleOverlay.textContent = caption;

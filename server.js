@@ -10,7 +10,7 @@ app.post('/api/generate', async (req, res) => {
     try {
         const { image, mediaType } = req.body;
 
-        const response = await fetch('https://api.anthropic.com/v1/messages', {
+        const response = await fetch('https://api.uucode.com/v1/messages', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -41,8 +41,14 @@ app.post('/api/generate', async (req, res) => {
         });
 
         const data = await response.json();
+
+        if (!response.ok) {
+            return res.status(response.status).json({ error: data.error || 'API 请求失败' });
+        }
+
         res.json(data);
     } catch (error) {
+        console.error('错误:', error);
         res.status(500).json({ error: error.message });
     }
 });
