@@ -10,7 +10,7 @@ app.post('/api/generate', async (req, res) => {
     try {
         const { image, mediaType } = req.body;
 
-        const response = await fetch('https://api.uucode.com/v1/messages', {
+        const response = await fetch('https://api.uucode.org/v1/messages', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
