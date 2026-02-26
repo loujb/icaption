@@ -3,39 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>图片字幕生成器</title>
+    <title>图片字幕添加工具</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
-        <h1>图片字幕生成器</h1>
-
-        <div class="upload-area" id="uploadArea">
-            <input type="file" id="fileInput" accept="image/*" hidden>
-            <div class="upload-text">
-                <p>点击或拖拽图片到这里</p>
-                <p class="upload-hint">支持 JPG、PNG、GIF 格式</p>
+        <div class="header-section">
+            <h1>图片字幕添加工具</h1>
+            <p class="subtitle">为您的图片添加专业的字幕效果</p>
+        </div>
+        
+        <!-- 左侧功能区 -->
+        <div class="left-section">
+            <!-- 图片上传区域 -->
+            <div class="upload-section">
+                <h2>📷 上传图片</h2>
+                <div class="upload-container">
+                    <input type="file" id="imageUpload" accept="image/*" hidden>
+                    <label for="imageUpload" class="upload-btn">
+                        <span>点击上传图片</span>
+                    </label>
+                    <p class="upload-hint">支持JPG、PNG等常见图片格式</p>
+                </div>
+            </div>
+            
+            <!-- 字体样式调整区域 -->
+            <div class="style-section">
+                <h2>🎨 调整样式</h2>
+                <div class="style-controls">
+                    <div class="control-group">
+                        <label for="fontFamily">字体:</label>
+                        <select id="fontFamily">
+                            <option value="Arial">Arial</option>
+                            <option value="Microsoft YaHei">微软雅黑</option>
+                            <option value="SimSun">宋体</option>
+                            <option value="SimHei">黑体</option>
+                        </select>
+                    </div>
+                    <div class="control-group">
+                        <label for="fontSize">字体大小:</label>
+                        <input type="range" id="fontSize" min="12" max="72" value="24">
+                        <span id="fontSizeValue">24px</span>
+                    </div>
+                    <div class="control-group">
+                        <label for="fontColor">字体颜色:</label>
+                        <input type="color" id="fontColor" value="#ffffff">
+                    </div>
+                    <div class="control-group">
+                        <label for="bgColor">背景颜色:</label>
+                        <input type="color" id="bgColor" value="#000000">
+                    </div>
+                    <div class="control-group">
+                    <label for="captionPosition">字幕位置:</label>
+                    <select id="captionPosition">
+                        <option value="bottom">底部</option>
+                        <option value="top">顶部</option>
+                        <option value="middle">中间</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label for="bgOpacity">背景透明度:</label>
+                    <input type="range" id="bgOpacity" min="0" max="1" step="0.1" value="0.7">
+                    <span id="bgOpacityValue">0.7</span>
+                </div>
+                <div class="control-group">
+                    <label for="bgPadding">背景内边距:</label>
+                    <input type="range" id="bgPadding" min="5" max="30" step="1" value="15">
+                    <span id="bgPaddingValue">15px</span>
+                </div>
+                </div>
+            </div>
+            
+            <!-- 字幕编辑区域 -->
+            <div class="caption-section">
+                <h2>📝 添加字幕</h2>
+                <div class="caption-editor">
+                    <textarea id="captionText" placeholder="请输入字幕内容..."></textarea>
+                </div>
+            </div>
+            
+            <!-- 新增：按钮容器 -->
+            <div class="buttons-container">
+                <button id="addCaptionBtn" class="btn">生成字幕图片</button>
+                <button id="downloadBtn" class="btn btn-primary">下载图片</button>
             </div>
         </div>
-
-        <div class="preview-section" id="previewSection" style="display: none;">
-            <div class="image-container">
-                <img id="previewImage" alt="预览图片">
-                <div class="subtitle-overlay" id="subtitleOverlay"></div>
+        
+        <!-- 右侧预览区 -->
+        <div class="right-section">
+            <!-- 图片预览和编辑区域 -->
+            <div class="edit-section">
+                <h2>👁️ 预览效果</h2>
+                <div class="preview-container">
+                    <div class="image-wrapper" id="imageWrapper">
+                        <img id="previewImage" src="" alt="预览图片">
+                        <div class="caption-layer" id="captionLayer"></div>
+                    </div>
+                </div>
             </div>
-
-            <div class="controls">
-                <button id="generateBtn" class="btn-primary">生成字幕</button>
-                <button id="resetBtn" class="btn-secondary">重新上传</button>
-            </div>
-        </div>
-
-        <div class="loading" id="loading" style="display: none;">
-            <div class="spinner"></div>
-            <p>正在生成字幕...</p>
         </div>
     </div>
-
+    
     <script src="script.js"></script>
 </body>
 </html>
